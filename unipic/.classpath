@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
@@ -5,3 +6,24 @@
 	<classpathentry kind="lib" path="lib/argparser.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
+=======
+<<<<<<< HEAD
+ <?xml version="1.0" encoding="UTF-8"?>
+  <classpath>
+  	<classpathentry kind="src" path="src"/>
+ 	<classpathentry kind="lib" path="lib/argparser.zip"/>
+  	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+  	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+  	<classpathentry kind="output" path="bin"/>
+</classpath>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/argparser.zip"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
+>>>>>>> f5d107c1994f3c1a27b89e2e9874510c2fdd7c18
+>>>>>>> 802ea2fda865df444b39974846759345f441e9ae
