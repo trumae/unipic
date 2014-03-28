@@ -1,14 +1,14 @@
 package unipic;
 
 import argparser.ArgParser;
+import argparser.IntHolder;
 import argparser.StringHolder;
 import argparser.ArgParseException;
 public class Main {
    
 	public static void main(String[] args) {
 		StringHolder fileName = new StringHolder();//armazena o caminho do arquivo .hex
-
-		int time=1000;
+		IntHolder tempo= new IntHolder(1000);
 		
 		try{
 			ArgParser parser = new ArgParser("UNIPIC - Simulador de Microcontrolador Microchip PIC");
@@ -17,7 +17,7 @@ public class Main {
 			parser.addOption ("-file %s #nome do arquivo a ser executado", fileName);
 			
 			//Adiciona opção para alterar o tempo do Clock
-			parser.addOption("-time %h #ciclo do clock", time);
+			parser.addOption("-clockTime %h #periodo do clock", tempo);
 			
 			parser.matchAllArgs (args);
 			
@@ -27,7 +27,7 @@ public class Main {
 			
 			//Cria um objeto, e chama o método setTempo() passando o valor armazenado em time
 			Clock clock=new Clock();
-			clock.setTempo(time);
+			clock.setTempo(Integer.parseInt(tempo.toString()));
 		}
 		catch(ArgParseException e){
 			System.out.println(e.getMessage());

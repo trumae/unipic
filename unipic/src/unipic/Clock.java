@@ -1,14 +1,20 @@
 package unipic;
 
 public class Clock {
-	int tempo;
+	private int tempo;
+	CPU cpu;
+	
 	public void setTempo(int time){
 		this.tempo=time;	
 	}
 	
-	public void Cronometro() throws InterruptedException{
-			while(System.currentTimeMillis() < tempo){
-				  wait();
+	public int getTempo(){
+		return tempo;
+	}
+	
+	public void start() throws InterruptedException{
+			while(true){
+				  Thread.sleep(tempo);
 			}
 	}
 	
