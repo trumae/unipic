@@ -22,4 +22,9 @@ public class PIC {
 		
 	}
 
+	public void step() {
+		// TODO Auto-generated method stub
+		System.out.println("Passo");
+	}
+
 }
