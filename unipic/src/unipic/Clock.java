@@ -1,23 +1,21 @@
 package unipic;
 
-import java.util.Scanner;
-
 public class Clock {
+	private int tempo;
+	CPU cpu;
+	
+	public void setTempo(int time){
+		this.tempo=time;	
+	}
+	
 	public int getTempo(){
-		Scanner ler = new Scanner( System.in );   
-		int tempo;
-		System.out.println("Um ciclo do Clock terá quantos segundos?");
-		tempo=ler.nextInt();
-		tempo*=1000;
 		return tempo;
 	}
 	
-	public void Cronometro(int tempo) throws InterruptedException{
-		try{
-			Thread.sleep(tempo);
-		}
-		catch(InterruptedException e){
-			System.out.println("Erro inesperado.");
-		}
+	public void start() throws InterruptedException{
+			while(true){
+				  Thread.sleep(tempo);
+			}
 	}
+	
 }
