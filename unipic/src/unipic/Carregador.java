@@ -1,6 +1,10 @@
 package unipic;
 
 import instrucoes.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Vector;
 public class Carregador {
 	/***
@@ -107,8 +111,37 @@ public class Carregador {
 			":021FFE00EA0FE8",
 			":00000001FF"
 	};
-	private void lerArquivo(){
-		codigo = null;
+	
+	
+	static String caminho = "D:/dice.hex";
+	private static String[] lerArquivo(String caminho){
+		String linha = ""; 
+		ArrayList<String> hexLista = new ArrayList<>();
+
+		int i = 0;
+
+		try {  
+
+			BufferedReader in = new BufferedReader(new FileReader(caminho));  
+			while ((linha = in.readLine()) != null) {  
+
+				hexLista.add(i, linha);
+				i++;
+			} 
+			in.close();
+			String[] hex = new String [hexLista.size()];
+
+			for( int x = 0; x < hexLista.size(); x++ ){
+				hex[x] = hexLista.get(x);
+				System.out.println(hex[x]);  // PARA VER SE FUNCIONA =D
+			}
+			return hex;
+
+		} catch (Exception e) {
+			System.err.println("Erro na abertura do arquivo " + caminho);  
+			System.err.println(e);
+			return null; 
+		}
 	}
 	
 	public String getAsm(){
