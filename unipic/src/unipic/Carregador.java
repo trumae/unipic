@@ -14,42 +14,42 @@ public class Carregador {
 	 * @return Flash com programa carregado
 	 */
 	//declaração das instrucoes
-	private Instrucao [] instrucoes = {
-			new ADDWF()
-//			new ANDWF(),
-//			new CLRF(),
-//			new CLRW(),
-//			new COMF(),
-//			new DECF(),
-//			new DECFSZ(),
-//			new INCF(),
-//			new INCFSZ(),
-//			new IORWF(),
-//			new MOVF(),
-//			new MOVWF(),
-//			new NOP(),
-//			new RLF(),
-//			new RRF(),
-//			new SUBWF(),
-//			new SWAPF(),
-//			new XORWF(),
-//			
-//			new BCF(),
-//			new BSF(),
-//			new BTFSC(),
-//			new BTFSS(),
-//			
-//			new ANDLW(),
-//			new CALL(),
-//			new CLRWDT(),
-//			new GOTO(),
-//			new IORLW(),
-//			new MOVLW(),
-//			new OPTION(),
-//			new RETLW(),
-//			new SLEEP(),
-//			new TRIS(),
-//			new XORLW()
+	private Object [][] instrucoes = new Object[][]{
+			{ ADDWF.class, "^000111[0|1]{1}[0|1]{5}$" },
+			{ ANDWF.class, "^000101[0|1]{1}[0|1]{5}$" },
+			{ CLRF.class, "^0000011[0|1]{5}$" },
+			{ CLRW.class, "^000001000000$" },
+			{ COMF.class, "^001001[0|1]{1}[0|1]{5}$" },
+			{ DECF.class, "^000011[0|1]{1}[0|1]{5}$" },
+			{ DECFSZ.class, "^001011[0|1]{1}[0|1]{5}$" },
+			{ INCF.class, "^001010[0|1]{1}[0|1]{5}$" },
+			{ INCFSZ.class, "^001111[0|1]{1}[0|1]{5}$" },
+			{ IORWF.class, "^000100[0|1]{1}[0|1]{5}$" },
+			{ MOVF.class, "^001000[0|1]{1}[0|1]{5}$" },
+			{ MOVWF.class, "^0000001[0|1]{5}$" },
+			{ NOP.class, "^000000000000$" },
+			{ RLF.class, "^001101[0|1]{1}[0|1]{5}$" },
+			{ RRF.class, "^001100[0|1]{1}[0|1]{5}$" },
+			{ SUBWF.class, "^000010[0|1]{1}[0|1]{5}$" },
+			{ SWAPF.class, "^001110[0|1]{1}[0|1]{5}$" },
+			{ XORWF.class, "^000110[0|1]{1}[0|1]{5}$" },
+			
+			{ BCF.class, "^0100[0|1]{3}[0|1]{5}$" },
+			{ BSF.class, "^0101[0|1]{3}[0|1]{5}$" },
+			{ BTFSC.class, "^0110[0|1]{3}[0|1]{5}$" },
+			{ BTFSS.class, "^0111[0|1]{3}[0|1]{5}$" },
+
+			{ ANDLW.class, "^1110[0|1]{8}$" },
+			{ CALL.class, "^1001[0|1]{8}$" },
+			{ CLRWDT.class, "^000000000100$" },
+			{ GOTO.class, "^101[0|1]{9}$" },
+			{ IORLW.class, "^1101[0|1]{8}$" },
+			{ MOVLW.class, "^1100[0|1]{8}$" },
+			{ OPTION.class, "^000000000010$" },
+			{ RETLW.class, "^1000[0|1]{8}$" },
+			{ SLEEP.class, "^000000000011$" },
+			{ TRIS.class, "^000000000[0|1]{3}$" },
+			{ XORLW.class, "^1111[0|1]{8}$" }
 	};
 	
 //	//BYTE-ORIENTED
@@ -165,8 +165,10 @@ public class Carregador {
 	 * @param filename String - ...
 	 * 
 	 * @return Vector<Instrucao> - Instrucoes que serao encaminhadas para FLASH da PIC
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	Vector<Instrucao> load(String filename) {
+	Vector<Instrucao> load(String filename) throws InstantiationException, IllegalAccessException {
 		int byteCount;
 		int address;
 		int recordType;
@@ -203,11 +205,13 @@ public class Carregador {
 					for(int i = 0, j = 0; i < bitData.length; i += 4, j++){
 						binInst[j] = bitData[i+1]+bitData[i+2]+bitData[i+3];
 					}
-					
+					//.matcher(binInstVal)
 					for(String binInstVal : binInst){
-						for(Instrucao instrucoesVal : this.instrucoes){
-							if(instrucoesVal.matcher(binInstVal)){
-								objInstrucoes.add(instrucoesVal.getInstrucao(binInstVal));
+						for(Object[] instrucoesVal : this.instrucoes){
+							if(Instrucao.matcher(binInstVal, (String) instrucoesVal[1])){
+								Instrucao i = (Instrucao)((Class<?>) instrucoesVal[0]).newInstance();
+								i.setup(binInstVal);
+								objInstrucoes.add(i);
 								continue;
 							}
 						}
@@ -255,11 +259,14 @@ public class Carregador {
 	//metodo main para testes simples
 	public static void main(String [] args){
 		Carregador c = new Carregador();
-		
-		Vector<Instrucao> i = c.load("teste");
-		
-		for(Instrucao in : i){
-			System.out.println(in.toString());
+		try{
+			Vector<Instrucao> i = c.load("teste");
+			for(Instrucao in : i){
+				System.out.println(in.toString());
+			}
+		}
+		catch(Exception e){
+			
 		}
 	}
 }

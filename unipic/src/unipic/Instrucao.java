@@ -17,16 +17,18 @@ public abstract class Instrucao{
 	 * 
 	 * @return boolean - verdadeiro caso a instrucao seja a testada e falso caso contrario
 	 */
-	public abstract boolean matcher(String comando);
+	public static boolean matcher(String input, String match){
+		return input.matches(match);
+	}
 	
 	/**
 	 * Metodo que retorna a instrucao filha dessa classe
 	 * 
 	 * @param comando String - String contendo a instrucao do .hex em Binario
 	 * 
-	 * @return Instrucao - Objeto Instrucao ja iniciado com valores de 'd' e 'f'
+	 * @ rucao - Objeto Instrucao ja iniciado com valores de 'd' e 'f'
 	 */
-	public abstract Instrucao getInstrucao(String comando);
+	public abstract void setup(String comando);
 	
 	public void setD(int d){
 		this.d = d;
