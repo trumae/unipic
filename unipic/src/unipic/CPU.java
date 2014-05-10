@@ -11,7 +11,9 @@ public class CPU {
 	public static void setW(int valor){
 	
 	}
-
+	public static void setK(boolean valor){
+		
+	}
 
 
 }
