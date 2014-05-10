@@ -6,8 +6,8 @@ package unipic;
  */
 public abstract class Instrucao{
 	private String match;
-	private int d;
-	private int f;
+	protected int d;
+	protected int f;
 	
 	/**
 	 * Metodo que verifica atravez de uma expressao regular se
