@@ -6,8 +6,9 @@ package unipic;
  */
 public abstract class Instrucao{
 	private String match;
-	private int d;
-	private int f;
+	protected int d;
+	protected int f;
+	protected int k;
 	
 	/**
 	 * Metodo que verifica atravez de uma expressao regular se
@@ -35,6 +36,9 @@ public abstract class Instrucao{
 	}
 	public void setF(int f){
 		this.f = f;
+	}
+	public void setK(int k){
+		this.k = k;
 	}
 	
 	public String toString(){
