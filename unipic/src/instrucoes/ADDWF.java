@@ -13,10 +13,10 @@ public class ADDWF extends Instrucao{
 	}
 	
 	public void run(){
-		int w = CPU.getW();
-		int valorEmF = Memoria.get(this.f);
+		byte w = CPU.getW();
+		byte valorEmF = Memoria.get(this.f);
 		
-		int soma = w+valorEmF;
+		byte soma = (byte) (w+valorEmF);
 		
 		if(this.d==0){
 			CPU.setW(soma);

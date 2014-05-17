@@ -10,9 +10,7 @@ public class ANDLW  extends Instrucao{
 	}
 		
 	public void run(){
-		int w = CPU.getW();
-		boolean and = w==k;
-		CPU.setK(and);
+		
 	}
 	
 }
