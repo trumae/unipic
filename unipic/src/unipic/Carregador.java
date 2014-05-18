@@ -113,7 +113,6 @@ public class Carregador {
 	};
 	
 	
-	static String caminho = "D:/dice.hex";
 	private static String[] lerArquivo(String caminho){
 		String linha = ""; 
 		ArrayList<String> hexLista = new ArrayList<>();
@@ -180,6 +179,7 @@ public class Carregador {
 		String [] binInst;
 		Vector<Instrucao> objInstrucoes =  new Vector<Instrucao>();
 		
+		codigo = lerArquivo(filename);
 		for(String c : codigo){
 			byteCount 	= Integer.parseInt(c.substring(1,3),16);
 			address 	= Integer.parseInt(c.substring(3,7),16);
