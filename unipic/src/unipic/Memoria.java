@@ -1,6 +1,8 @@
 package unipic;
 
 public class Memoria {
+	private byte bit;
+	
 	private static byte [] data = new byte [16];
 	private static byte OPTION;
 	private static byte TRISGPIO;
@@ -12,6 +14,10 @@ public class Memoria {
 	private static final int FSR    = 4;
 	private static final int OSCCAL = 5;
 	private static final int GPIO   = 6;
+	
+	//private static final int OPTION_REG = 0;
+			
+	private static final double INTOSC = 0.018;  //18ms
 	
 	public void reset(){
 		//Seta valor do PCL
@@ -127,6 +133,186 @@ public class Memoria {
 				break;
 		}
 		
+		return 0;
+	}
+	
+	public void setSTATUS(String nomeBit, byte bit){
+		switch(nomeBit){
+			case "GPWUF":
+				this.bit=bit;
+			case "CWUF":
+				this.bit=bit;
+			case "Z":
+				this.bit=bit;
+			case "DC":
+				this.bit=bit;
+			case "C":
+				this.bit=bit;
+			default:
+				//nomeBit invalido, dispara excecao
+				break;
+		}
+	}
+	
+	public static byte getINDF(byte bit){
+		// O INDF atende ao registro cujo endereco esta no FSR.
+		data[INDF] = Memoria.getFSR(bit);
+		return data[INDF];
+	}
+	
+	public void setINDF(byte endereco){
+		this.data[INDF]=endereco;
+	}
+	
+	public static byte getFSR(byte pEndereco){  
+		// "Ponteiro" de endereco de memoria de dados. (Enderecamento indireto)
+		data[FSR] = (byte) pEndereco;
+		// Incrementa em 1 o valor do FSR
+		//data[FSR]= (byte) (data[FSR] & (byte)0x01);
+		return data[FSR];
+	}
+	
+	public void setFSR(byte pEndereco){  
+		this.data[FSR] = (byte) pEndereco;
+	}
+	
+	public static byte getOSCCAL(String nomeBit){
+		byte bit;
+		// Frequencia interna = 4MHz
+		// Contem 7 bits para calibracao e sao configurados da mesma maneira
+		switch(nomeBit){
+			case "CAL6":
+				// OSCCAL    			= 0011 1111
+				// Maximum Frequency  	= 0011 1111
+				// Center Frequency     = 0000 0000   
+				// Minimum Frequency    = 0100 0000  
+				bit = (byte) (data[OSCCAL]);
+				if((bit >= 0) && (bit <=127)) bit = 1;
+				return bit;
+			case "CAL5":
+				bit = (byte) (data[OSCCAL]);
+				if((bit >= 0) && (bit <=127)) bit = 1;
+				return bit;
+			case "CAL4":
+				bit = (byte) (data[OSCCAL]);
+				if((bit >= 0) && (bit <=127)) bit = 1;
+				return bit;
+			case "CAL3":
+				bit = (byte) (data[OSCCAL]);
+				if((bit >= 0) && (bit <=127)) bit = 1;
+				return bit;
+			case "CAL2":
+				bit = (byte) (data[OSCCAL]);
+				if((bit >= 0) && (bit <=127)) bit = 1;
+				return bit;
+			case "CAL1":
+				bit = (byte) (data[OSCCAL]);
+				if((bit >= 0) && (bit <=127)) bit = 1;
+				return bit;
+			case "CAL0":
+				bit = (byte) (data[OSCCAL]);
+				if((bit >= 0) && (bit <=127)) bit = 1;
+				return bit;
+			case "FOSC4":
+				// FOSC4    			= INTOSC/4
+				bit = (byte) (data[OSCCAL]);
+				if(bit == INTOSC/4) bit =1;
+				return bit;
+			default:
+				//nomeBit invalido, dispara excessao		
+				break;
+		}
+		
+		return 0;
+	}
+	
+	public void setOSCCAL(String nomeBit, byte bit){
+		switch(nomeBit){
+			case "CAL6":
+				this.bit=bit;
+			case "CAL5":
+				this.bit=bit;
+			case "CAL4":
+				this.bit=bit;
+			case "CAL3":
+				this.bit=bit;
+			case "CAL2":
+				this.bit=bit;
+			case "CAL1":
+				this.bit=bit;
+			case "CAL0":
+				this.bit=bit;
+			case "FOSC4":
+				this.bit=bit;
+			default:
+				//nomeBit invalido, dispara excessao		
+				break;
+		}
+
+	}	
+	
+	public static byte getGPIO(String nomeBit, byte bit){  
+		// O valor do bit define se a tensao eh alta (1) ou baixa (0)
+		byte tensao = 0;
+		switch(nomeBit){
+			case "GP0":
+				if (bit == (byte) 1){
+					tensao=1;
+					return tensao;
+				} else return tensao;
+			case "GP1":
+				if (bit == (byte) 1){
+					tensao=1;
+					return tensao;
+				} else return tensao;
+			case "GP2":
+				if (bit == (byte) 1){
+					tensao=1;
+					return tensao;
+				} else return tensao;
+			default:
+				//nomeBit invalido, dispara excessao		
+				break;
+		}
+		return 0;
+	}
+	
+	public void setGPIO(String nomeBit, byte bit){  
+		switch(nomeBit){
+			case "GP0":
+				if (bit == (byte) 1){
+					this.data[GPIO]=1;
+				} else this.data[GPIO]=0;
+			case "GP1":
+				if (bit == (byte) 1){
+					this.data[GPIO]=1;
+				} else this.data[GPIO]=0;
+			case "GP2":
+				if (bit == (byte) 1){
+					this.data[GPIO]=1;
+				} else this.data[GPIO]=0;
+			case "GP3":
+				if (bit == (byte) 1){
+					this.data[GPIO]=1;
+				} else this.data[GPIO]=0;
+			default:
+				//nomeBit invalido, dispara excessao		
+				break;
+		}
+	}
+	
+	public static byte getPCL(String enderecoInstrucao){
+		// A variavel enderecoInstrucao refere-se ao endereco da instrucao que esta sendo executada. 
+		// O valor do PC é incrementado em 1 a cada ciclo de instrucao, menos para instrucoes que mudam 
+		// o próprio PC ou onde o PCL eh o destino. (MOVWF PC, ADDWF PC e BSF PC, 5)
+		
+		//address 	= Integer.parseInt(c.substring(3,7),16);
+
+		return 0;
+	}
+	
+	public static byte getTRM0(String nomeBit){
+
 		return 0;
 	}
 	
