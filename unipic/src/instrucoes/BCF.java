@@ -1,11 +1,16 @@
 package instrucoes;
+import unipic.CPU;
 import unipic.Instrucao;
+import unipic.Memoria;
 
 public class BCF extends Instrucao{
 	@Override
 	public void setup(String comando){
-		BCF inst = new BCF();
+		
 		//     ** Vide Pagina 54 do manual da PIC **
 	}
-		
+	
+	public void run(Memoria mem, CPU cpu){
+
+	}
 }

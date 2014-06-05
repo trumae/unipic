@@ -1,11 +1,17 @@
 package instrucoes;
+import unipic.CPU;
 import unipic.Instrucao;
+import unipic.Memoria;
 
 public class BTFSS extends Instrucao{
 	@Override
 	public void setup(String comando){
-		BTFSS inst = new BTFSS();
+		
 		//     ** Vide Pagina 54 do manual da PIC **
+	}
+	
+	public void run(Memoria mem, CPU cpu){
+
 	}
 		
 }

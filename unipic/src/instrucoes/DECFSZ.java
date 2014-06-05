@@ -1,11 +1,17 @@
 package instrucoes;
+import unipic.CPU;
 import unipic.Instrucao;
+import unipic.Memoria;
 	
 public class DECFSZ extends Instrucao{
 	@Override
 	public void setup(String comando){
-		DECFSZ inst = new DECFSZ();
+
 		//     ** Vide Pagina 53 do manual da PIC **
+	}
+	
+	public void run(Memoria mem, CPU cpu){
+
 	}
 		
 }
