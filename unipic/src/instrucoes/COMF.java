@@ -1,13 +1,18 @@
 package instrucoes;
+import unipic.CPU;
 import unipic.Instrucao;
+import unipic.Memoria;
 
 public class COMF extends Instrucao{
 	@Override
 	public void setup(String comando){
-		COMF inst = new COMF();
+		
 		//     ** Vide Pagina 53 do manual da PIC **
 	}
 		
+	public void run(Memoria mem, CPU cpu){
+
+	}
 }
 
 	

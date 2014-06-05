@@ -9,7 +9,7 @@ public class ANDLW  extends Instrucao{
 			this.setK(Integer.parseInt(comando.substring(5),8)); 
 	}
 		
-	public void run(){
+	public void run(Memoria mem, CPU cpu){
 		
 	}
 	

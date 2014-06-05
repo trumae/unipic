@@ -1,12 +1,17 @@
 package instrucoes;
+import unipic.CPU;
 import unipic.Instrucao;
+import unipic.Memoria;
 
 public class SWAPF extends Instrucao{
 	@Override
 	public void setup(String comando){
-		SWAPF inst = new SWAPF();
+
 		//     ** Vide Pagina 54 do manual da PIC *
 		
 	}
-		
+	
+	public void run(Memoria mem, CPU cpu){
+
+	}
 }
