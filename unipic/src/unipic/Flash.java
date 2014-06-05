@@ -1,5 +1,7 @@
 package unipic;
 
-public class Flash extends Memoria{
+import java.util.Vector;
 
+public class Flash {
+	public Vector<Instrucao> programa;
 }

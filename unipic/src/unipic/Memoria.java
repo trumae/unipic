@@ -3,9 +3,9 @@ package unipic;
 public class Memoria {
 	private byte bit;
 	
-	private static byte [] data = new byte [16];
-	private static byte OPTION;
-	private static byte TRISGPIO;
+	private  byte [] data = new byte [16];
+	private  byte OPTION;
+	private  byte TRISGPIO;
 	
 	private static final int INDF   = 0;
 	private static final int TMR0   = 1;
@@ -24,10 +24,10 @@ public class Memoria {
 		data[PCL] = (byte)0xFF;
 
 		//Seta valor do STATUS
-		//1° seta os 3 primeiros bits como 0
+		//1ï¿½ seta os 3 primeiros bits como 0
 		//1F = 0001 1111
 		data[STATUS] = (byte)(data[STATUS] & (byte)0x1F);
-		//2° seta os proximos 2 bits como 1
+		//2ï¿½ seta os proximos 2 bits como 1
 		//18 = 0001 1000
 		data[STATUS] = (byte)(data[STATUS] | (byte)0x18);
 		
@@ -44,7 +44,7 @@ public class Memoria {
 		//seta valor do TRISGPIO
 		TRISGPIO = (byte)0x0F;
 	}
-	public static byte get(int endereco){
+	public  byte get(int endereco){
 		if(
 			endereco == Memoria.INDF   ||
 			endereco == Memoria.TMR0   ||
@@ -54,12 +54,12 @@ public class Memoria {
 			endereco == Memoria.OSCCAL ||
 			endereco == Memoria.GPIO
 		){
-			//Endereço invalido, dispara exceçao
+			//Endereï¿½o invalido, dispara exceï¿½ao
 			return 0;
 		}
 		return data[endereco];
 	}
-	public static void set(int endereco, byte valor){
+	public  void set(int endereco, byte valor){
 		if(
 			endereco == Memoria.INDF   ||
 			endereco == Memoria.TMR0   ||
@@ -69,14 +69,14 @@ public class Memoria {
 			endereco == Memoria.OSCCAL ||
 			endereco == Memoria.GPIO
 		){
-			//Endereço invalido, dispara exceçao
+			//Endereï¿½o invalido, dispara exceï¿½ao
 			return;
 		}
 		data[endereco] = valor;
 	}
 	
 	//acessar registradores especificos
-	public static byte getSTATUS(String nomeBit){
+	public  byte getSTATUS(String nomeBit){
 		byte bit;
 		switch(nomeBit){
 			case "GPWUF":
@@ -154,9 +154,9 @@ public class Memoria {
 		}
 	}
 	
-	public static byte getINDF(byte bit){
+	public  byte getINDF(byte bit){
 		// O INDF atende ao registro cujo endereco esta no FSR.
-		data[INDF] = Memoria.getFSR(bit);
+		data[INDF] = getFSR(bit);
 		return data[INDF];
 	}
 	
@@ -164,7 +164,7 @@ public class Memoria {
 		this.data[INDF]=endereco;
 	}
 	
-	public static byte getFSR(byte pEndereco){  
+	public  byte getFSR(byte pEndereco){  
 		// "Ponteiro" de endereco de memoria de dados. (Enderecamento indireto)
 		data[FSR] = (byte) pEndereco;
 		// Incrementa em 1 o valor do FSR
@@ -176,7 +176,7 @@ public class Memoria {
 		this.data[FSR] = (byte) pEndereco;
 	}
 	
-	public static byte getOSCCAL(String nomeBit){
+	public  byte getOSCCAL(String nomeBit){
 		byte bit;
 		// Frequencia interna = 4MHz
 		// Contem 7 bits para calibracao e sao configurados da mesma maneira
@@ -251,7 +251,7 @@ public class Memoria {
 
 	}	
 	
-	public static byte getGPIO(String nomeBit, byte bit){  
+	public  byte getGPIO(String nomeBit, byte bit){  
 		// O valor do bit define se a tensao eh alta (1) ou baixa (0)
 		byte tensao = 0;
 		switch(nomeBit){
@@ -301,18 +301,15 @@ public class Memoria {
 		}
 	}
 	
-	public static byte getPCL(String enderecoInstrucao){
-		// A variavel enderecoInstrucao refere-se ao endereco da instrucao que esta sendo executada. 
-		// O valor do PC é incrementado em 1 a cada ciclo de instrucao, menos para instrucoes que mudam 
-		// o próprio PC ou onde o PCL eh o destino. (MOVWF PC, ADDWF PC e BSF PC, 5)
-		
-		//address 	= Integer.parseInt(c.substring(3,7),16);
-
-		return 0;
+	public  byte getPCL(){
+		return data[PCL];
 	}
 	
-	public static byte getTRM0(String nomeBit){
-
+	public void setPCL(byte pc){
+		data[PCL] = pc;
+	}
+	
+	public  byte getTRM0(String nomeBit){
 		return 0;
 	}
 	

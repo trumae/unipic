@@ -1,15 +1,15 @@
 package unipic;
 
 public class CPU {
+	private byte W;
 	public void step(){
 		System.out.println("Uma instrucao");
 	}
-	public static byte getW(){
-		return 0;
-		
+	public byte getW(){
+		return W;
 	}
-	public static void setW(byte valor){
-	
+	public void setW(byte valor){
+		W = valor;
 	}
 
 }

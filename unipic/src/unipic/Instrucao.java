@@ -48,4 +48,8 @@ public abstract class Instrucao{
 	public String toString(){
 		return super.toString()+" d:"+d+" f:"+f;
 	}
+	
+	public void run(Memoria mem, CPU cpu) {
+		
+	}
 }
