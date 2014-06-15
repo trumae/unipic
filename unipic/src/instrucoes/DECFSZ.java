@@ -40,3 +40,4 @@ public class DECFSZ extends Instrucao{
 		mem.setPCL((byte) (mem.getPCL() + 1));	
 	}	
 }
+

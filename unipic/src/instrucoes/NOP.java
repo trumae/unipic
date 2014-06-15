@@ -11,7 +11,8 @@ public class NOP extends Instrucao{
 	}
 	
 	public void run(Memoria mem, CPU cpu){
-
+		// incrementa PCL
+		mem.setPCL((byte) (mem.getPCL() + 1));
 	}
 }
 
