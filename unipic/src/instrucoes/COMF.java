@@ -18,8 +18,8 @@ public class COMF extends Instrucao{
 	public void run(Memoria mem, CPU cpu){
 		//Armazena valor de f
 		byte valorEmF = mem.get(this.f);
-		//Os bits do registro f sao complementados, ou seja, invertidos
-		byte complemento = (byte) (1111111 - valorEmF);
+		//Os bits do registro f sao complementados
+		byte complemento = (byte) (~valorEmF & 0xFF);
 		
 		//Se o valor em D for igual a zero, o resultado eh armazenado em W
 		if(this.d==0){
