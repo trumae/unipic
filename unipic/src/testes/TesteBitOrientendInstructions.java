@@ -124,4 +124,34 @@ public class TesteBitOrientendInstructions extends TestCase{
 			fail("A 2° instrucao não incrementou 2x o PCL");
 		}
 	}
+	
+	public void testINCF(){
+		
+		Memoria mem = new Memoria();
+		CPU cpu = new CPU();
+		
+		mem.set(15, (byte) 0x01);
+		mem.set(14, (byte)0x02);
+		
+		Instrucao inst1 = new INCF();
+		Instrucao inst2 = new INCF();
+		
+
+		inst1.setup("010110101111"); // d=1 f=15
+		inst2.setup("010100001110"); // d=0 f=14
+		
+		inst1.run(mem, cpu);
+		if( mem.get(15) != (byte) 0x02 ) {
+			
+			   fail("Erro na 1ª instrução, esperado  obtido: 0x02 "+mem.get(15));
+		
+		}
+		inst2.run(mem, cpu);
+		if( mem.get(14) != (byte) 0x03 ) {
+			
+			   fail("Erro na 1ª instrução, esperado  obtido: 0x03 "+mem.get(15));
+		
+		}
+}
+	
 }
