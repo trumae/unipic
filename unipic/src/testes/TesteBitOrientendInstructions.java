@@ -149,7 +149,7 @@ public class TesteBitOrientendInstructions extends TestCase{
 		inst2.run(mem, cpu);
 		if( mem.get(14) != (byte) 0x03 ) {
 			
-			   fail("Erro na 1ª instrução, esperado  obtido: 0x03 "+mem.get(15));
+			   fail("Erro na 1ª instrução, esperado  obtido: 0x03 "+mem.get(14));
 		
 		}
 }
