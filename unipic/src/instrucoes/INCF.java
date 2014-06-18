@@ -25,16 +25,12 @@ public class INCF extends Instrucao{
 		novoF ++;
 		mem.set(f,novoF);
 		
-		if (this.d == 0){
-			
-			cpu.setW(novoF);
-			
+		if (this.d == 0){			
+			cpu.setW(novoF);			
 		}
 		
-		else {
-			
-			mem.set(f,novoF);
-			
+		else {			
+			mem.set(f,novoF);			
 		}
 			
 		mem.setPCL((byte) (mem.getPCL() + 1));
