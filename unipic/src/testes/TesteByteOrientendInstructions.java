@@ -10,14 +10,14 @@ public class TesteByteOrientendInstructions extends TestCase{
 	public void testANDWF(){
 		Memoria mem = new Memoria();
  		CPU cpu = new CPU();
- 		mem.set(15, (byte)0);
+ 		mem.set(15, (byte)70);
  		cpu.setW((byte)01011001);
  		
  		Instrucao i1 = new ANDWF();
 		i1.setup("010100001111"); // d=0 f=15 w=55, resultado = 1001 0000
  		
  		i1.run(mem, cpu);
- 		if(mem.get(15) != 0){
+ 		if(mem.get(15) != 70){
  			fail("Erro na 1a Instrucao, esperado: 60 , obtido: "+mem.get(15));
  		}
 	}
