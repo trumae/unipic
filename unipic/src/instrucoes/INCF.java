@@ -15,9 +15,9 @@ public class INCF extends Instrucao{
 	}
 
 	/***
-	 *  Os conteúdos do registro 'f' são incrementados
-	 *  Se o bit 'd' é '0', o resultado é colocado no registro 'W'
-	 *  Se o bit 'd' é '1', o resultado é colocado de volta no registro 'f'
+	 *  Os conteudos do registro 'f' sao incrementados
+	 *  Se o bit 'd' e '0', o resultado e colocado no registro 'W'
+	 *  Se o bit 'd' e '1', o resultado e colocado de volta no registro 'f'
 	 */
 	public void run(Memoria mem, CPU cpu){
 		 
