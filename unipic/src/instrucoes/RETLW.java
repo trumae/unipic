@@ -1,16 +1,37 @@
 package instrucoes;
+
 import unipic.CPU;
 import unipic.Instrucao;
 import unipic.Memoria;
 
 public class RETLW extends Instrucao{
+
+	/***
+	 *  Inicia a instrução 
+	 * @param comando 1000 kkkk kkkk
+	 **/
 	@Override
 	public void setup(String comando){
 
-		//     ** Vide Pagina 54 do manual da PIC **
+		setK(Integer.parseInt(comando.substring(4), 2));
 	}
-	
-	public void run(Memoria mem, CPU cpu){
 
+	/***
+	 *  O registrador 'W' é carregado em um literal 'k' de 8 bits
+	 * @param mem memória a ser alterada
+	 * @param cpu serve para usar os registradores do processador
+	 */
+	public void run(Memoria mem, CPU cpu){
+		cpu.setW((byte) this.k
+
+		/***
+		 * e depois a Instrução volta o PCL pro
+		 * inicio da pilha (setando o PCL como 
+		 * zero)
+		 */
+
+
+
+		mem.setPCL((byte) (0));
 	}
 }
