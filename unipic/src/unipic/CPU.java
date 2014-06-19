@@ -1,7 +1,7 @@
 package unipic;
 
 public class CPU {
-	private byte W;
+	public byte W;
 	public void step(){
 		System.out.println("Uma instrucao");
 	}
