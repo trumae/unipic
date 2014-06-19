@@ -1,13 +1,18 @@
 package instrucoes;
+import unipic.CPU;
 import unipic.Instrucao;
+import unipic.Memoria;
 
 public class IORWF extends Instrucao{
 	@Override
 	public void setup(String comando){
-		IORWF inst = new IORWF();
+		
 		//     ** Vide Pagina 53 do manual da PIC **
 		
 	}
 		
+	public void run(Memoria mem, CPU cpu){
+
+	}
 }
 

@@ -9,6 +9,7 @@ public abstract class Instrucao{
 	protected int d;
 	protected int f;
 	protected int k;
+	protected int b;
 	
 	/**
 	 * Metodo que verifica atravez de uma expressao regular se
@@ -40,8 +41,15 @@ public abstract class Instrucao{
 	public void setK(int k){
 		this.k = k;
 	}
+	public void setB(int b){
+		this.b = b;
+	}
 	
 	public String toString(){
 		return super.toString()+" d:"+d+" f:"+f;
+	}
+	
+	public void run(Memoria mem, CPU cpu) {
+		
 	}
 }
