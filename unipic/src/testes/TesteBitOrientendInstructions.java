@@ -143,13 +143,33 @@ public class TesteBitOrientendInstructions extends TestCase{
 		inst1.run(mem, cpu);
 		if( mem.get(15) != (byte) 0x02 ) {
 			
-			   fail("Erro na 1° instruçao, esperado  obtido: 0x02 "+mem.get(15));
+			   fail("Erro na 1° instrucao, esperado: 0x02,  obtido: "+mem.get(15));
 		
 		}
 		inst2.run(mem, cpu);
 		if( mem.get(14) != (byte) 0x03 ) {
 			
-			   fail("Erro na 2° instruçao, esperado  obtido: 0x03 "+mem.get(14));
+			   fail("Erro na 2° instrucao, esperado: 0x03, obtido: "+mem.get(14));
+		
+		}
+	}
+	
+	public void testRLF(){
+		
+		Memoria mem = new Memoria();
+		CPU cpu = new CPU();
+		
+		mem.set(15, (byte) 0x01);
+		
+		Instrucao inst1 = new RLF();
+		
+
+		inst1.setup("010110101111"); // d=1 f=15
+		
+		inst1.run(mem, cpu);
+		if( mem.get(15) != (byte) 0x80 ) {
+			
+			   fail("Erro na 1° instrucao, esperado: 0x80  obtido: "+mem.get(15));
 		
 		}
 	}
