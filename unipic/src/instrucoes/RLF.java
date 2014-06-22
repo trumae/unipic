@@ -24,8 +24,10 @@ public class RLF extends Instrucao{
 		byte left = (byte) ((mem.get(this.f)) << 7);
 		mem.set(f,left);
 		
-		if (this.d == 0){			
-			cpu.setW(left);			
+		if (this.d == 0){	
+			
+			cpu.setW(left);
+			
 		}
 		
 		else {			
