@@ -1,11 +1,16 @@
 package instrucoes;
+import unipic.CPU;
 import unipic.Instrucao;
+import unipic.Memoria;
 
 public class ANDLW  extends Instrucao{
 	@Override
 	public void setup(String comando){
-		ANDLW inst = new ANDLW();
-		//     ** Vide Pagina 54 do manual da PIC **
+			this.setK(Integer.parseInt(comando.substring(5),8)); 
 	}
 		
+	public void run(Memoria mem, CPU cpu){
+		
+	}
+	
 }
