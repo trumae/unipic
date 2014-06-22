@@ -124,4 +124,38 @@ public class TesteByteOrientedInstructions extends TestCase{
 			fail("Erro na 2° instrucao, esperado: f=-30, obtido: "+mem.get(14));
 		}
 	}
+	
+	public void testeMOVWF(){
+		Memoria mem = new Memoria();
+ 		CPU cpu = new CPU();
+ 		
+ 		mem.set(15, (byte)2);
+ 		mem.set(14, (byte)2);
+ 		mem.set(13, (byte)2);
+ 		
+ 		cpu.setW((byte)00000010);
+ 		
+ 		Instrucao i1 = new MOVWF();
+		i1.setup("000001000001"); //f=65 
+ 		Instrucao i2 = new MOVWF();
+		i2.setup("000001000010"); //f=66 
+ 		Instrucao i3 = new MOVWF();
+		i3.setup("000001000011"); //f=67 
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(15) != 2){
+ 			fail("Erro na 1a Instrucao, esperado: 2 , obtido: "+mem.get(15));
+ 		}
+ 		
+ 		i2.run(mem, cpu);
+ 		if(mem.get(14) != 2){
+ 			fail("Erro na 1a Instrucao, esperado: 2 , obtido: "+mem.get(14));
+ 		}
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(13) != 2){
+ 			fail("Erro na 1a Instrucao, esperado: 2 , obtido: "+mem.get(13));
+ 		}
+	}
+
 }
