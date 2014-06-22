@@ -53,4 +53,50 @@ public class TesteLiteralOrientedInstructions extends TestCase{
 			fail("Erro na 4° instrucao, esperado: 0, obtido: "+mem.get(12));
 		}
 	}
+	
+	public void testeGOTO(){
+		Memoria mem = new Memoria();
+ 		CPU cpu = new CPU();
+ 		
+ 		mem.set(15, (byte)15);
+ 		
+ 		Instrucao i1 = new GOTO();
+		i1.setup("101000001111");
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.getPCL() != 15){
+ 			fail("Erro na 1a Instrucao, esperado: 15 , obtido: "+mem.getPCL());
+ 		}
+	}
+	
+	public void testeRETLW(){
+		Memoria mem = new Memoria();
+ 		CPU cpu = new CPU();
+ 		
+ 		mem.set(15, (byte)35);
+ 		mem.set(14, (byte)127);
+ 		mem.set(13, (byte)0);
+ 		
+ 		Instrucao i1 = new RETLW();
+		i1.setup("100000100011"); //k=35 
+ 		Instrucao i2 = new MOVLW();
+		i2.setup("110001111111"); //k=127 
+ 		Instrucao i3 = new MOVLW();
+		i3.setup("110000000000"); //k=0 
+ 		
+ 		i1.run(mem, cpu);
+ 		if(cpu.getW() != 35){
+ 			fail("Erro na 1a Instrucao, esperado: 35 , obtido: "+cpu.getW());
+ 		}
+ 		
+ 		i2.run(mem, cpu);
+ 		if(cpu.getW() != 127){
+ 			fail("Erro na 1a Instrucao, esperado: 127 , obtido: "+cpu.getW());
+ 		}
+ 		
+ 		i3.run(mem, cpu);
+ 		if(cpu.getW() != 0){
+ 			fail("Erro na 1a Instrucao, esperado: 0 , obtido: "+cpu.getW());
+ 		}
+	}
 }
