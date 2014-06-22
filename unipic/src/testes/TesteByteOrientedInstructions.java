@@ -157,5 +157,38 @@ public class TesteByteOrientedInstructions extends TestCase{
  			fail("Erro na 1a Instrucao, esperado: 2 , obtido: "+mem.get(13));
  		}
 	}
+	
+	public void testeINCF(){
+		Memoria mem = new Memoria();
+ 		CPU cpu = new CPU();
+ 		
+ 		mem.set(15, (byte)1);
+ 		mem.set(14, (byte)2);
+ 		mem.set(13, (byte)3);
+ 		
+ 		cpu.setW((byte)00000010);
+ 		
+ 		Instrucao i1 = new INCF();
+		i1.setup("001010000000"); //f=0 
+ 		Instrucao i2 = new INCF();
+		i2.setup("001010000001"); //f=1 
+ 		Instrucao i3 = new INCF();
+		i3.setup("001010000010"); //f=2 
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(15) != 1){
+ 			fail("Erro na 1a Instrucao, esperado: 1 , obtido: "+mem.get(15));
+ 		}
+ 		
+ 		i2.run(mem, cpu);
+ 		if(mem.get(14) != 2){
+ 			fail("Erro na 1a Instrucao, esperado: 2 , obtido: "+mem.get(14));
+ 		}
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(13) != 3){
+ 			fail("Erro na 1a Instrucao, esperado: 3 , obtido: "+mem.get(13));
+ 		}
+	}
 
 }
