@@ -14,7 +14,7 @@ public class Carregador {
 	 * @return Flash com programa carregado
 	 */
 	//declaração das instrucoes
-	private Object [][] instrucoes = new Object[][]{
+	public Object [][] instrucoes = new Object[][]{
 			{ ADDWF.class, "^000111[0|1]{1}[0|1]{5}$" },
 			{ ANDWF.class, "^000101[0|1]{1}[0|1]{5}$" },
 			{ CLRF.class, "^0000011[0|1]{5}$" },
@@ -93,27 +93,27 @@ public class Carregador {
 
 	
 	//codigo
-	private String [] codigo = {
-			":020000040000FA",
-			":100000002500140A070EE201090801080B0804087C",
-			":1000100008080008050806083100FF0C3000F0024F",
-			":100020000F0AF1020D0A0008080C06006700000C18",
-			":10003000020075007600130202093200030E26004A",
-			":10004000030C0C0932031203040F2600030C0C09E5",
-			":10005000B5024306B6021402030EE2013B0A400A4F",
-			":100060004B0A010C660734001602020F43071B0AF5",
-			":1000700074006600030066060300010C34001B0ACE",
-			":10008000020C6607460A340075007600F7024A0A39",
-			":10009000060C3700560A1602010F4307560A030CD6",
-			":1000A000340075007600D70033001B0A15021F0EBE",
-			":1000B00043071B0A9302030E4306010C040F33008F",
-			":0200C0001B0A19",
-			":021FFE00EA0FE8",
-			":00000001FF"
+	public String [] codigo = {
+			":020000040000FA", //1
+			":100000002500140A070EE201090801080B0804087C", //2
+			":1000100008080008050806083100FF0C3000F0024F", //3
+			":100020000F0AF1020D0A0008080C06006700000C18", //4
+			":10003000020075007600130202093200030E26004A", //5
+			":10004000030C0C0932031203040F2600030C0C09E5", //6
+			":10005000B5024306B6021402030EE2013B0A400A4F", //7
+			":100060004B0A010C660734001602020F43071B0AF5", //8
+			":1000700074006600030066060300010C34001B0ACE", //9
+			":10008000020C6607460A340075007600F7024A0A39", //10
+			":10009000060C3700560A1602010F4307560A030CD6", //11
+			":1000A000340075007600D70033001B0A15021F0EBE", //12
+			":1000B00043071B0A9302030E4306010C040F33008F", //13
+			":0200C0001B0A19", //14
+			":021FFE00EA0FE8", // 15
+			":00000001FF" //16
 	};
 	
 	
-	private static String[] lerArquivo(String caminho){
+	public static String[] lerArquivo(String caminho){
 		String linha = ""; 
 		ArrayList<String> hexLista = new ArrayList<>();
 
@@ -167,7 +167,7 @@ public class Carregador {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	Vector<Instrucao> load(String filename) throws InstantiationException, IllegalAccessException {
+	public Vector<Instrucao> load(String filename) throws InstantiationException, IllegalAccessException {
 		int byteCount;
 		int address;
 		int recordType;
@@ -186,7 +186,7 @@ public class Carregador {
 			recordType 	= Integer.parseInt(c.substring(7,9),16);
 			
 			dataLenght 	= byteCount*2;
-			data 		= c.substring(9,(9+dataLenght));
+			data = c.substring(9,(9+dataLenght));
 			
 			checksum 	= Integer.parseInt(c.substring((9+dataLenght),(11+dataLenght)),16);
 			
@@ -244,7 +244,7 @@ public class Carregador {
 	 * @return String[] - Array de Strings com todos os pares de Binarios 
 	 * invertidos.
 	 */
-	private String [] inverteData(String [] data){
+	public static String [] inverteData(String [] data){
 		String backup;
 		for(int i = 0; i < data.length; i++){
 			backup = data[i];
