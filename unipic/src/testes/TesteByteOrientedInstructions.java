@@ -124,4 +124,174 @@ public class TesteByteOrientedInstructions extends TestCase{
 			fail("Erro na 2° instrucao, esperado: f=-30, obtido: "+mem.get(14));
 		}
 	}
+	
+	public void testeMOVWF(){
+		Memoria mem = new Memoria();
+ 		CPU cpu = new CPU();
+ 		
+ 		mem.set(15, (byte)2);
+ 		mem.set(14, (byte)2);
+ 		mem.set(13, (byte)2);
+ 		
+ 		cpu.setW((byte)00000010);
+ 		
+ 		Instrucao i1 = new MOVWF();
+		i1.setup("000001000001"); //f=65 
+ 		Instrucao i2 = new MOVWF();
+		i2.setup("000001000010"); //f=66 
+ 		Instrucao i3 = new MOVWF();
+		i3.setup("000001000011"); //f=67 
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(15) != 2){
+ 			fail("Erro na 1a Instrucao, esperado: 2 , obtido: "+mem.get(15));
+ 		}
+ 		
+ 		i2.run(mem, cpu);
+ 		if(mem.get(14) != 2){
+ 			fail("Erro na 1a Instrucao, esperado: 2 , obtido: "+mem.get(14));
+ 		}
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(13) != 2){
+ 			fail("Erro na 1a Instrucao, esperado: 2 , obtido: "+mem.get(13));
+ 		}
+	}
+	
+	public void testeINCF(){
+		Memoria mem = new Memoria();
+ 		CPU cpu = new CPU();
+ 		
+ 		mem.set(15, (byte)1);
+ 		mem.set(14, (byte)2);
+ 		mem.set(13, (byte)3);
+ 		
+ 		cpu.setW((byte)00000010);
+ 		
+ 		Instrucao i1 = new INCF();
+		i1.setup("001010000000"); //f=0 
+ 		Instrucao i2 = new INCF();
+		i2.setup("001010000001"); //f=1 
+ 		Instrucao i3 = new INCF();
+		i3.setup("001010000010"); //f=2 
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(15) != 1){
+ 			fail("Erro na 1a Instrucao, esperado: 1 , obtido: "+mem.get(15));
+ 		}
+ 		
+ 		i2.run(mem, cpu);
+ 		if(mem.get(14) != 2){
+ 			fail("Erro na 1a Instrucao, esperado: 2 , obtido: "+mem.get(14));
+ 		}
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(13) != 3){
+ 			fail("Erro na 1a Instrucao, esperado: 3 , obtido: "+mem.get(13));
+ 		}
+	}
+	
+	
+	/* Teste SWAPF*/
+	
+	public void testSWAPF(){
+		Memoria mem = new Memoria();
+ 		CPU cpu = new CPU();
+ 		
+ 		mem.set(15, (byte)26);
+ 		mem.set(14, (byte)42);
+ 		mem.set(13, (byte)58);
+ 		
+ 		Instrucao i1 = new SWAPF();
+		i1.setup("001110100001"); //f=1 invertendo bits 00011010 - 26
+ 		Instrucao i2 = new SWAPF();
+		i2.setup("001110100010"); //f=2 invertendo bits 00101010 - 42
+ 		Instrucao i3 = new SWAPF();
+		i3.setup("001110100011"); //f=3 invertendo bits 00111010 - 58
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(15) != 26){
+ 			fail("Erro na 1a Instrucao, esperado: 26 , obtido: "+mem.get(15));
+ 		}
+ 		
+ 		i2.run(mem, cpu);
+ 		if(mem.get(14) != 42){
+ 			fail("Erro na 1a Instrucao, esperado: 42 , obtido: "+mem.get(14));
+ 		}
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(13) != 58){
+ 			fail("Erro na 1a Instrucao, esperado: 58 , obtido: "+mem.get(13));
+ 		}
+	}
+	
+	/* Teste SUBWF */
+	
+	public void testSUBWF(){
+		Memoria mem = new Memoria();
+ 		CPU cpu = new CPU();
+ 		
+ 		mem.set(15, (byte)6);
+ 		mem.set(14, (byte)20);
+ 		mem.set(13, (byte)30);
+ 		
+ 		cpu.setW((byte)00000000);
+ 		
+ 		Instrucao i1 = new SUBWF();
+		i1.setup("0000100000110"); //f=6 
+ 		Instrucao i2 = new SUBWF();
+		i2.setup("0000101010100"); //f=20 
+ 		Instrucao i3 = new SUBWF();
+		i3.setup("0000101011110"); //f=30 
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(15) != 6){
+ 			fail("Erro na 1a Instrucao, esperado: 0 , obtido: "+mem.get(15));
+ 		}
+ 		
+ 		i2.run(mem, cpu);
+ 		if(mem.get(14) != 20){
+ 			fail("Erro na 1a Instrucao, esperado: 15 , obtido: "+mem.get(14));
+ 		}
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(13) != 30){
+ 			fail("Erro na 1a Instrucao, esperado: 25 , obtido: "+mem.get(13));
+ 		}
+	}
+	
+	/* Teste XORWF*/	
+	public void testXORWF(){
+		Memoria mem = new Memoria();
+ 		CPU cpu = new CPU();
+ 		
+ 		mem.set(15, (byte)0);
+ 		mem.set(14, (byte)1);
+ 		mem.set(13, (byte)2);
+ 		
+ 		cpu.setW((byte)10111111);
+ 		
+ 		Instrucao i1 = new XORWF();
+		i1.setup("000110111111"); 
+ 		Instrucao i2 = new XORWF();
+		i2.setup("000110111110");
+ 		Instrucao i3 = new XORWF();
+		i3.setup("000110111101"); 
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(15) != 0){
+ 			fail("Erro na 1a Instrucao, esperado: 0 , obtido: "+mem.get(15));
+ 		}
+ 		
+ 		i2.run(mem, cpu);
+ 		if(mem.get(14) != 1){
+ 			fail("Erro na 1a Instrucao, esperado: 1 , obtido: "+mem.get(14));
+ 		}
+ 		
+ 		i1.run(mem, cpu);
+ 		if(mem.get(13) != 2){
+ 			fail("Erro na 1a Instrucao, esperado: 2 , obtido: "+mem.get(13));
+ 		}
+	}
+
 }
