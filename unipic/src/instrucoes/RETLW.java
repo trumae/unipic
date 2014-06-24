@@ -22,7 +22,7 @@ public class RETLW extends Instrucao{
 	 * @param cpu serve para usar os registradores do processador
 	 */
 	public void run(Memoria mem, CPU cpu){
-		cpu.setW((byte) this.k
+		cpu.setW((byte) this.k);
 
 		/***
 		 * e depois a Instrução volta o PCL pro
