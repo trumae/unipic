@@ -4,7 +4,7 @@ public class Memoria {
 	private byte bit;
 	
 	private  byte [] data = new byte [16];
-	private  byte OPTION;
+	public  byte OPTION;
 	private  byte TRISGPIO;
 	
 	private static final int INDF   = 0;
